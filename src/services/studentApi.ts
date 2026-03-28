@@ -12,14 +12,32 @@ export const addStudent = async (data: Student) => {
     },
     body: JSON.stringify(data),
   });
-  const result = await response.json(); 
+  const result = await response.json();
 
-  console.log("rsp JSON :::: ", result);
+  console.log('rsp JSON :::: ', result);
 
   return result;
 };
 
 export const getStudents = async () => {
   const response = await fetch(`${BASE_URL}/get_students`);
+  return response.json();
+};
+
+export const getAllStudents = async (
+  page = 0,
+  size = 10,
+): Promise<{
+  content: Student[];
+  totalPages: number;
+  totalElements: number;
+}> => {
+  console.log(
+    'IN STudent API ::::::',
+    `${BASE_URL}/all_students?page=${page}&size=${size}`,
+  );
+  const response = await fetch(
+    `${BASE_URL}/all_students?page=${page}&size=${size}`,
+  );
   return response.json();
 };
