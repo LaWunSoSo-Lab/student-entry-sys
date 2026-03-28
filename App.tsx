@@ -11,6 +11,8 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import StudentFormScreen from './src/screens/StudentFormScreen';
+import StudentListScreen from './src/screens/StudentListScreen';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -28,10 +30,11 @@ function AppContent() {
 
   return (
     <View style={styles.container}>
-      <NewAppScreen
+      {/* <NewAppScreen
         templateFileName="App.tsx"
         safeAreaInsets={safeAreaInsets}
-      />
+      /> */}
+      <StudentListScreen />
     </View>
   );
 }
