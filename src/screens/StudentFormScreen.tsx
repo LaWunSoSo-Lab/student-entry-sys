@@ -16,7 +16,8 @@ import CustomButton from '../components/CustomButton';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { BottomTabParamList } from '../navigation/types';
 
-type Props = BottomTabScreenProps<BottomTabParamList, 'StudentList'>;
+
+type Props = BottomTabScreenProps<BottomTabParamList, 'Dashboard'>;
 
 export default function StudentFormScreen({navigation} : Props) {
   const [studentName, setStudentName] = useState('');
@@ -40,7 +41,7 @@ export default function StudentFormScreen({navigation} : Props) {
       setStudentName('');
       setFatherName('');
       setClassName('');
-      navigation.navigate("StudentList")
+      navigation.navigate("Dashboard")
     } catch (error) {
       console.error(error);
       Alert.alert('Error', 'Failed to save student');
@@ -56,6 +57,7 @@ export default function StudentFormScreen({navigation} : Props) {
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled" // allows pressing submit while keyboard is open
+        showsVerticalScrollIndicator={false}
       >
         <CustomText style={{ marginBottom: 8, fontSize: 16 }}>
           {'Enter Student Name'}
@@ -106,8 +108,8 @@ const styles = StyleSheet.create({
   scrollContainer: {
     padding: 24,
     paddingBottom: 100, // extra space so content scrolls above keyboard
-    justifyContent: 'center',
-    flex: 1,
+    justifyContent: 'flex-start',
+    flexGrow: 1,
   },
   input: {
     backgroundColor: '#fff',

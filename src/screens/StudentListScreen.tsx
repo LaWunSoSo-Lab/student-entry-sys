@@ -2,12 +2,12 @@ import React, { useState, useCallback } from 'react';
 import { View, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { BottomTabParamList } from '../navigation/types';
 import { getAllStudents, getStudents } from '../services/studentApi';
 import { Student } from '../types/student';
 import CustomText from '../components/CustomText';
+import { BottomTabParamList } from '../navigation/types';
 
-type Props = BottomTabScreenProps<BottomTabParamList, 'StudentForm'>;
+type Props = BottomTabScreenProps<BottomTabParamList, 'Form'>;
 
 export default function StudentListScreen({ navigation }: Props) {
   const [students, setStudents] = useState<Student[]>([]);
@@ -103,7 +103,7 @@ export default function StudentListScreen({ navigation }: Props) {
             marginTop: 20,
           }}
         >
-          {'You can add student in Form Tab!'}
+          {"Currently, there is no student. \nYou can add student in Form Tab!"}
         </CustomText>
       )}
     </View>
