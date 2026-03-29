@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../navigation/types';
 import CustomText from '../components/CustomText';
 import CustomButton from '../components/CustomButton';
@@ -76,69 +77,71 @@ export default function StudentDetailScreen({ navigation, route }: Props) {
   if (!student) return null;
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <CustomText style={styles.title}>Student Detail</CustomText>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <CustomText style={styles.title}>Student Detail</CustomText>
 
-      <View style={styles.row}>
-        <CustomText style={styles.label}>Student Name:</CustomText>
-        <CustomText style={styles.value}>{student.studentName}</CustomText>
-      </View>
+        <View style={styles.row}>
+          <CustomText style={styles.label}>Student Name:</CustomText>
+          <CustomText style={styles.value}>{student.studentName}</CustomText>
+        </View>
 
-      <View style={styles.row}>
-        <CustomText style={styles.label}>Father Name:</CustomText>
-        <CustomText style={styles.value}>{student.fatherName}</CustomText>
-      </View>
+        <View style={styles.row}>
+          <CustomText style={styles.label}>Father Name:</CustomText>
+          <CustomText style={styles.value}>{student.fatherName}</CustomText>
+        </View>
 
-      <View style={[styles.row, { marginBottom: 16 }]}>
-        <CustomText style={styles.label}>Class:</CustomText>
-        <CustomText style={styles.value}>{student.className}</CustomText>
-      </View>
+        <View style={[styles.row, { marginBottom: 16 }]}>
+          <CustomText style={styles.label}>Class:</CustomText>
+          <CustomText style={styles.value}>{student.className}</CustomText>
+        </View>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'flex-end',
-          marginBottom: 24,
-        }}
-      >
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('StudentUpdate', { studentData: student })
-          }
+        <View
           style={{
-            width: 40,
-            height: 40,
-            alignItems: 'flex-end',
-            justifyContent: 'center',
-            marginRight: 20,
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            marginBottom: 24,
           }}
         >
-          <EditIcon width={24} height={24} />
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('StudentUpdate', { studentData: student })
+            }
+            style={{
+              width: 40,
+              height: 40,
+              alignItems: 'flex-end',
+              justifyContent: 'center',
+              marginRight: 20,
+            }}
+          >
+            <EditIcon width={24} height={24} />
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => deleteStudent(studentId)}
-          style={{
-            width: 40,
-            height: 40,
-            alignItems: 'flex-end',
-            justifyContent: 'center',
-          }}
-        >
-          <TrashIcon width={24} height={24} />
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity
+            onPress={() => deleteStudent(studentId)}
+            style={{
+              width: 40,
+              height: 40,
+              alignItems: 'flex-end',
+              justifyContent: 'center',
+            }}
+          >
+            <TrashIcon width={24} height={24} />
+          </TouchableOpacity>
+        </View>
 
-      <CustomButton
-        title="Back"
-        onPress={() => navigation.goBack()}
-        backgroundColor="#2194f0"
-        textColor="#fff"
-        fontSize={18}
-        borderRadius={16}
-        paddingHorizontal={30}
-      />
-    </ScrollView>
+        <CustomButton
+          title="Back"
+          onPress={() => navigation.goBack()}
+          backgroundColor="#2194f0"
+          textColor="#fff"
+          fontSize={18}
+          borderRadius={16}
+          paddingHorizontal={30}
+        />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

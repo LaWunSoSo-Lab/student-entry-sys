@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "studentEntrySys.app"
-               BlueprintName = "studentEntrySys"
-               ReferencedContainer = "container:studentEntrySys.xcodeproj">
+               BuildableName = "StudentMS.app"
+               BlueprintName = "StudentMS"
+               ReferencedContainer = "container:StudentMS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "studentEntrySysTests.xctest"
-               BlueprintName = "studentEntrySysTests"
-               ReferencedContainer = "container:studentEntrySys.xcodeproj">
+               BuildableName = "StudentMSTests.xctest"
+               BlueprintName = "StudentMSTests"
+               ReferencedContainer = "container:StudentMS.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "studentEntrySys.app"
-            BlueprintName = "studentEntrySys"
-            ReferencedContainer = "container:studentEntrySys.xcodeproj">
+            BuildableName = "StudentMS.app"
+            BlueprintName = "StudentMS"
+            ReferencedContainer = "container:StudentMS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "studentEntrySys.app"
-            BlueprintName = "studentEntrySys"
-            ReferencedContainer = "container:studentEntrySys.xcodeproj">
+            BuildableName = "StudentMS.app"
+            BlueprintName = "StudentMS"
+            ReferencedContainer = "container:StudentMS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

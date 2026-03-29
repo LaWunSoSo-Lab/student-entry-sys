@@ -8,10 +8,11 @@ import {
   TextInput,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../navigation/types';
 import CustomText from '../components/CustomText';
 import CustomButton from '../components/CustomButton';
-import { updateStudent, updateStudentById } from '../services/studentApi';
+import { updateStudentById } from '../services/studentApi';
 import { Student } from '../types/student';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'UpdateStudent'>;
@@ -48,7 +49,7 @@ export default function UpdateStudentScreen({ navigation, route }: Props) {
         fatherName,
         className,
       });
-      console.log("RESPONE UPDATE ::: ", response)
+      console.log('RESPONE UPDATE ::: ', response);
       Alert.alert('Success', 'Student updated successfully');
       navigation.goBack(); // go back to detail screen
     } catch (err: any) {
@@ -59,59 +60,61 @@ export default function UpdateStudentScreen({ navigation, route }: Props) {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <CustomText style={styles.title}>Update Student</CustomText>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <CustomText style={styles.title}>Update Student</CustomText>
 
-      {/* <CustomInput label="Student Name" value={name} onChangeText={setName} />
+        {/* <CustomInput label="Student Name" value={name} onChangeText={setName} />
       <CustomInput label="Father Name" value={fatherName} onChangeText={setFatherName} />
       <CustomInput label="Class" value={className} onChangeText={setClassName} /> */}
 
-      <CustomText style={{ marginBottom: 8, fontSize: 16 }}>
-        {'Enter Student Name'}
-      </CustomText>
-      <TextInput
-        style={styles.input}
-        placeholder="Student Name"
-        value={studentName}
-        onChangeText={setStudentName}
-        placeholderTextColor={'#d5d5d5'}
-      />
-      <CustomText style={{ marginBottom: 8, fontSize: 16 }}>
-        {'Enter Father Name'}
-      </CustomText>
-      <TextInput
-        style={styles.input}
-        placeholder="Father Name"
-        value={fatherName}
-        onChangeText={setFatherName}
-        placeholderTextColor={'#d5d5d5'}
-      />
-      <CustomText style={{ marginBottom: 8, fontSize: 16 }}>
-        {'Enter Class Name'}
-      </CustomText>
-      <TextInput
-        style={styles.input}
-        placeholder="Class Name"
-        value={className}
-        onChangeText={setClassName}
-        placeholderTextColor={'#d5d5d5'}
-      />
-
-      {loading ? (
-        <ActivityIndicator />
-      ) : (
-        <CustomButton
-          title="Update"
-          onPress={handleUpdate}
-          backgroundColor="#2194f0"
-          textColor="#fff"
-          fontSize={16}
-          borderRadius={16}
-          paddingHorizontal={30}
-          style={{ marginTop: 16 }}
+        <CustomText style={{ marginBottom: 8, fontSize: 16 }}>
+          {'Enter Student Name'}
+        </CustomText>
+        <TextInput
+          style={styles.input}
+          placeholder="Student Name"
+          value={studentName}
+          onChangeText={setStudentName}
+          placeholderTextColor={'#d5d5d5'}
         />
-      )}
-    </ScrollView>
+        <CustomText style={{ marginBottom: 8, fontSize: 16 }}>
+          {'Enter Father Name'}
+        </CustomText>
+        <TextInput
+          style={styles.input}
+          placeholder="Father Name"
+          value={fatherName}
+          onChangeText={setFatherName}
+          placeholderTextColor={'#d5d5d5'}
+        />
+        <CustomText style={{ marginBottom: 8, fontSize: 16 }}>
+          {'Enter Class Name'}
+        </CustomText>
+        <TextInput
+          style={styles.input}
+          placeholder="Class Name"
+          value={className}
+          onChangeText={setClassName}
+          placeholderTextColor={'#d5d5d5'}
+        />
+
+        {loading ? (
+          <ActivityIndicator />
+        ) : (
+          <CustomButton
+            title="Update"
+            onPress={handleUpdate}
+            backgroundColor="#2194f0"
+            textColor="#fff"
+            fontSize={16}
+            borderRadius={16}
+            paddingHorizontal={30}
+            style={{ marginTop: 16 }}
+          />
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

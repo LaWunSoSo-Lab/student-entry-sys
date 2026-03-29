@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   fetchStudentDetail,
   getAllStudents,
@@ -62,7 +63,7 @@ export default function StudentListScreen({ navigation }: Props) {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {students.length > 0 ? (
         <>
           <CustomText
@@ -124,7 +125,7 @@ export default function StudentListScreen({ navigation }: Props) {
           {'Currently, there is no student. \nYou can add student in Form Tab!'}
         </CustomText>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
