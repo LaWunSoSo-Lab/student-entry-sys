@@ -1,11 +1,22 @@
 import React, { useState, useCallback } from 'react';
-import { View, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { getAllStudents, getStudents } from '../services/studentApi';
+import {
+  fetchStudentDetail,
+  getAllStudents,
+  getStudents,
+} from '../services/studentApi';
 import { Student } from '../types/student';
 import CustomText from '../components/CustomText';
-import { BottomTabParamList } from '../navigation/types';
+import { BottomTabParamList, RootStackParamList } from '../navigation/types';
+import DetailIcon from '../../assets/icons/DetailIcon';
 
 type Props = BottomTabScreenProps<BottomTabParamList, 'Form'>;
 
@@ -16,17 +27,22 @@ export default function StudentListScreen({ navigation }: Props) {
   const [hasMore, setHasMore] = useState<boolean>(true);
   const PAGE_SIZE = 10;
 
+  // Refresh when screen comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      setPage(0);
+      setHasMore(true);
+      fetchStudents(0);
+    }, []),
+  );
+
   // Fetch students
   const fetchStudents = async (nextPage = 0) => {
     // Stop fetching if no more pages
     if (!hasMore && nextPage !== 0) return;
-
-    console.log('Got HERER::::::');
-
     setLoading(true);
     try {
       const data = await getAllStudents(nextPage, PAGE_SIZE);
-      console.log('DATAET:::::', data);
 
       if (nextPage === 0) {
         setStudents(data.content); // first page
@@ -45,15 +61,6 @@ export default function StudentListScreen({ navigation }: Props) {
     }
   };
 
-  // Refresh when screen comes into focus
-  useFocusEffect(
-    useCallback(() => {
-      setPage(0);
-      setHasMore(true);
-      fetchStudents(0);
-    }, []),
-  );
-
   return (
     <View style={styles.container}>
       {students.length > 0 ? (
@@ -66,7 +73,7 @@ export default function StudentListScreen({ navigation }: Props) {
               marginBottom: 20,
             }}
           >
-            {'Student List'}
+            {'Students List'}
           </CustomText>
 
           <FlatList
@@ -75,13 +82,24 @@ export default function StudentListScreen({ navigation }: Props) {
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <View style={styles.itemCard}>
-                <CustomText style={styles.name}>{item.studentName}</CustomText>
-                <CustomText style={styles.subText}>
-                  Father: {item.fatherName}
-                </CustomText>
-                <CustomText style={styles.subText}>
-                  Class: {item.className}
-                </CustomText>
+                <View style={styles.itemTxtGroup}>
+                  <CustomText style={styles.name}>
+                    {item.studentName}
+                  </CustomText>
+                  <CustomText style={styles.subText}>
+                    Father: {item.fatherName}
+                  </CustomText>
+                  <CustomText style={styles.subText}>
+                    Class: {item.className}
+                  </CustomText>
+                </View>
+                {/* To widen touchable area for user convenience */}
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('StudentDetail', { studentId: item.id })}
+                  style={{ width: 40, height: 40, alignItems: 'flex-end' }}
+                >
+                  <DetailIcon width={24} height={24} />
+                </TouchableOpacity>
               </View>
             )}
             onEndReached={() => fetchStudents(page)}
@@ -103,7 +121,7 @@ export default function StudentListScreen({ navigation }: Props) {
             marginTop: 20,
           }}
         >
-          {"Currently, there is no student. \nYou can add student in Form Tab!"}
+          {'Currently, there is no student. \nYou can add student in Form Tab!'}
         </CustomText>
       )}
     </View>
@@ -113,8 +131,8 @@ export default function StudentListScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16 },
   name: {
-    fontWeight: 'bold',
     fontSize: 16,
+    fontFamily: 'Poppins-Bold'
   },
   itemCard: {
     width: '100%',
@@ -127,6 +145,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  itemTxtGroup: {
+    width: '80%',
   },
   subText: {
     fontSize: 14,
