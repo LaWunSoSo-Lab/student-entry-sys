@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  View,
   StyleSheet,
   ScrollView,
   ActivityIndicator,
@@ -19,9 +18,6 @@ type Props = NativeStackScreenProps<RootStackParamList, 'UpdateStudent'>;
 
 export default function UpdateStudentScreen({ navigation, route }: Props) {
   const oldStudentData: Student = route?.params?.studentData;
-  console.log('NAVIGATION ::: ', navigation);
-  console.log('ROUTE ::::', route);
-  //   return;
 
   const [studentName, setStudentName] = useState(oldStudentData.studentName);
   const [fatherName, setFatherName] = useState(oldStudentData.fatherName);
@@ -33,23 +29,14 @@ export default function UpdateStudentScreen({ navigation, route }: Props) {
       Alert.alert('Validation', 'All fields are required');
       return;
     }
-    console.log('STUDENT OLD DATA :::: ', oldStudentData);
-
-    console.log('STUDENT NAME :::: ', studentName);
-    console.log('FATHER NAME :::: ', fatherName);
-    console.log('CLASS NAME :::: ', className);
-    console.log('ID  :::: ', oldStudentData.id);
-    // return;
 
     setLoading(true);
     try {
-      //   await updateStudent(oldStudentData.id, { name, fatherName, className });
       const response = await updateStudentById(oldStudentData?.id, {
         studentName,
         fatherName,
         className,
       });
-      console.log('RESPONE UPDATE ::: ', response);
       Alert.alert('Success', 'Student updated successfully');
       navigation.goBack(); // go back to detail screen
     } catch (err: any) {

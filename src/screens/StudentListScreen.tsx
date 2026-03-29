@@ -10,9 +10,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
-  fetchStudentDetail,
   getAllStudents,
-  getStudents,
 } from '../services/studentApi';
 import { Student } from '../types/student';
 import CustomText from '../components/CustomText';
@@ -64,7 +62,7 @@ export default function StudentListScreen({ navigation }: Props) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {students.length > 0 ? (
+      {students?.length > 0 ? (
         <>
           <CustomText
             style={{

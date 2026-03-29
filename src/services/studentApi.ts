@@ -1,10 +1,8 @@
 import { Student } from '../types/student';
 import { BASE_URL } from '../constants/api';
 
+// Add New Student
 export const addStudent = async (data: Student) => {
-  console.log('Add Student Data :::: ', data);
-  console.log('API :::: ', `${BASE_URL}/post_student`);
-
   const response = await fetch(`${BASE_URL}/post_student`, {
     method: 'POST',
     headers: {
@@ -14,16 +12,16 @@ export const addStudent = async (data: Student) => {
   });
   const result = await response.json();
 
-  console.log('rsp JSON :::: ', result);
-
   return result;
 };
 
+// Get Students (Function not used anymore)
 export const getStudents = async () => {
   const response = await fetch(`${BASE_URL}/get_students`);
   return response.json();
 };
 
+// Get Students with pagination
 export const getAllStudents = async (
   page = 0,
   size = 10,
@@ -32,19 +30,15 @@ export const getAllStudents = async (
   totalPages: number;
   totalElements: number;
 }> => {
-  console.log(
-    'IN STudent API ::::::',
-    `${BASE_URL}/all_students?page=${page}&size=${size}`,
-  );
   const response = await fetch(
     `${BASE_URL}/all_students?page=${page}&size=${size}`,
   );
   return response.json();
 };
 
+// Fetch Detail by ID
 export const fetchStudentDetail = async (id: number): Promise<Student> => {
   const url = `${BASE_URL}/get_student/${id}`;
-  console.log('Fetch Student Detail API ::::', url);
 
   const response: Response = await fetch(url);
 
@@ -62,15 +56,12 @@ export const fetchStudentDetail = async (id: number): Promise<Student> => {
 
   const result: Student = await response.json();
 
-  console.log('Student Detail Response ::::', result);
-
   return result;
 };
 
-// DELETE STUDENT
+// Delete Student by ID
 export const deleteStudentById = async (id: number) => {
   const url = `${BASE_URL}/delete_student/${id}`;
-  console.log('Delete Student API ::::', url);
 
   const response = await fetch(url, {
     method: 'DELETE',
@@ -92,16 +83,12 @@ export const deleteStudentById = async (id: number) => {
   } catch (_) {
     result = null;
   }
-
-  console.log('Delete Student Response ::::', result);
   return result;
 };
 
-// UPDATE STUDENT
+// Update Student by ID
 export const updateStudentById = async (id: number, data: Partial<Student>) => {
   const url = `${BASE_URL}/update_student/${id}`;
-  console.log('Update Student API ::::', url);
-  console.log('Update Data ::::', data);
 
   const response = await fetch(url, {
     method: 'PUT',
@@ -119,7 +106,6 @@ export const updateStudentById = async (id: number, data: Partial<Student>) => {
   }
 
   const result: Student = await response.json();
-  console.log('Update Student Response ::::', result);
 
   return result;
 };
